@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="#" onsubmit="mySubmit(event)">
+      <input type="text" name="name" placeholder="name" />
+      <input type="file" name="avatar" />
+      <input type="submit" value="Create My Account" />
+    </form>
+  </body>
+  <script>
+    const InputName = document.querySelector('input[name="name"]');
+    const InputFile = document.querySelector('input[name="avatar"]');
+    function mySubmit(e) {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("name", InputName.value);
+      formData.append("image", InputFile.files[0]);
+      fetch("http://localhost:8080/upload", {
+        method: "POST",
+        body: formData,
+      });
+    }
+  </script>
+</html>
