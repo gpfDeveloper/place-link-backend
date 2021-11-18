@@ -74,7 +74,7 @@ const createPlace = async (req, res, next) => {
 
   let coordinates;
   try {
-    coordinates = await getCoordsForAddress(address);
+    coordinates = await getCoordsForAddress(address.trim());
   } catch (error) {
     return next(error);
   }
@@ -112,6 +112,7 @@ const createPlace = async (req, res, next) => {
     await user.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
+    console.log(err);
     const error = new HttpError(
       "Creating place failed, please try again.",
       500

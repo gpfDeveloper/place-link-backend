@@ -11,9 +11,9 @@ async function getCoordsForAddress(address) {
       address
     )}`
   );
-  const data = response.data?.data;
+  const data = response.data.data;
 
-  if (!data || data.length === 0) {
+  if (!data || data.length === 0 || !data[0].latitude) {
     const error = new HttpError(
       "Could not find location for the specified address.",
       422
